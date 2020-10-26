@@ -20,6 +20,7 @@ struct Human {
 	char position[20];
 };
 
+// ввод правителей
 void vvod(Human* x, int n) {
 	int i;
 	for(i = 0; i < n; i++) {
@@ -31,6 +32,7 @@ void vvod(Human* x, int n) {
 	return;
 }
 
+// вывод всех правителей
 void vivod(Human* x, int n){
 	int i;
 	for(i = 0; i < n; i++) {
@@ -42,6 +44,7 @@ void vivod(Human* x, int n){
 	return;
 }
 
+// Вывод одного правителя
 void vivod1(Human* x, int i) {
 	cout << "Номер правителя: " << i+1 << " ";
 	cout << "Имя: " << (x + i)->name << " ";
@@ -50,6 +53,7 @@ void vivod1(Human* x, int i) {
 	return;
 }
 
+// Нахождение правителя по имени
 int FindName(Human* x, int n, char* st){
 	FILE* fp; int i; char namefile[11]; int flag = 0;
 	cout<<"Введите имя файла"<<'\n';
@@ -69,6 +73,7 @@ int FindName(Human* x, int n, char* st){
 	cout << "\n\n";
 }
 
+// Нахождение правителей, которые младше определенного возраста
 int Findold(Human* x, int n, int tage){
 	FILE* fp; int i; char namefile[11]; int flag = 0;
 	cout<<"Кол-во правителей: "<<n<<'\n';
@@ -91,6 +96,7 @@ int Findold(Human* x, int n, int tage){
 	return 1;	
 }
 
+// запись файла
 int writefile(Human* x,int n){ 
 	FILE* fp; int i; char namefile[11];
 	cout<<"Введите имя файла"<<'\n';
@@ -112,6 +118,7 @@ int writefile(Human* x,int n){
 	return 1;
 }
 
+// Чтение из файла и вывод информации
 int readfile(Human* x,int n){ 
 	FILE* fp; int i; char namefile[11];
 	cout<<"Кол-во правителей: "<<n<<'\n';
@@ -134,6 +141,7 @@ int readfile(Human* x,int n){
 	return 1;
 }
 
+// Вывод меню
 int menu() {
 	int i;
 	do {
@@ -176,10 +184,11 @@ int main() {
 	cout << "Введите кол-во правителей: " << endl;
 	cin >> i;
 	
-	
+	// создание структуры
 	Human* russianHuman;
 	russianHuman = new Human[i];
 	
+	// запись файла
 	writefile(russianHuman, i);
 	readfile(russianHuman, i);
 	
