@@ -1,0 +1,203 @@
+/* Программа Laba_8					*/
+/* Функции					        */
+/* Программист: Пукин А.А., гр 944  */
+/* Проверил: Лаврентьев С.И. 		*/
+/* Дата написания: 20.10.2020 г. 	*/
+
+
+
+#include <iostream>
+#include <stdio.h>
+#include <cstdlib>
+#include <Windows.h>
+#include <string.h>
+
+using namespace std;
+
+struct Human {
+	char name[30];
+	int age;
+	char position[20];
+};
+
+void vvod(Human* x, int n) {
+	int i;
+	for(i = 0; i < n; i++) {
+		cout << "Номер правителя " << i+1 << endl;
+		cout << "Имя "; cin >> (x + i)->name;
+		cout << "Возраст "; cin >> (x + i)->age;
+		cout << "Должность "; cin >> (x + i)->position;
+	}
+	return;
+}
+
+void vivod(Human* x, int n){
+	int i;
+	for(i = 0; i < n; i++) {
+		cout << "Номер правителя: " << i+1 << " ";
+		cout << "Имя: " << (x + i)->name << " ";
+		cout << "Возраст: " << (x + i)->age << " ";
+		cout << "Должность: " << (x + i)->position << endl;
+	}
+	return;
+}
+
+void vivod1(Human* x, int i) {
+	cout << "Номер правителя: " << i+1 << " ";
+	cout << "Имя: " << (x + i)->name << " ";
+	cout << "Возраст: " << (x + i)->age << " ";
+	cout << "Должность: " << (x + i)->position << endl;
+	return;
+}
+
+int FindName(Human* x, int n, char* st){
+	FILE* fp; int i; char namefile[11]; int flag = 0;
+	cout<<"Введите имя файла"<<'\n';
+	cin>>namefile;
+	fp=fopen(namefile,"r");
+	if (fp==0) { cout<<"Файл не открыт!"<<'\n'; return -1; }
+	else
+	for(i = 0; i < n; i++){
+		fscanf(fp,"%d",&(x+i)->name);
+		if (strcmp((x+i)->name,st)==0){
+			flag = 1; return i;
+		} }
+		if (flag == 0){
+			cout << "Правителя с таким именем нет!" << '\n'; return -1;
+		}
+	
+	cout << "\n\n";
+}
+
+int Findold(Human* x, int n, int tage){
+	FILE* fp; int i; char namefile[11]; int flag = 0;
+	cout<<"Кол-во правителей: "<<n<<'\n';
+	cout<<"Введите имя файла"<<'\n';
+	cin>>namefile;
+	fp=fopen(namefile,"r");
+	if (fp==0) { cout<<"Файл не открыт!"<<'\n'; return -1; }
+	else
+	for(i=0;i<n;i++){       
+		fscanf(fp,"%d",&(x+i)->age);
+		if((x + i)->age < tage){
+			flag = 1; vivod1(x,i);
+		}
+		if(flag == 0)
+		cout << "Правителей младше возраста " << tage << " нет!" << '\n';
+	}
+	fclose(fp);
+	cout << "\n\n";
+	
+	return 1;	
+}
+
+int writefile(Human* x,int n){ 
+	FILE* fp; int i; char namefile[11];
+	cout<<"Введите имя файла"<<'\n';
+	cin>>namefile;
+	fp=fopen(namefile,"w");
+	if (fp==0) {cout<<"Файл не открыт!"<<'\n'; return -1;}	
+	 else 
+	  for(i = 0;i < n;i++){
+	  	printf("Введите Имя, возраст и должность: ");
+	  	cin >> (x+i)->name;
+	  	fprintf(fp,"%s\n", (x+i)->name); 
+		cin >> (x+i)->age;             	        
+	  	fprintf(fp,"%d\n",(x+i)->age);
+		cin >> (x+i)->position;                      
+	  	fprintf(fp,"%s\n",(x+i)->position);
+		}
+	fclose(fp);
+	cout << "\n\n";
+	return 1;
+}
+
+int readfile(Human* x,int n){ 
+	FILE* fp; int i; char namefile[11];
+	cout<<"Кол-во правителей: "<<n<<'\n';
+	cout<<"Введите имя файла"<<'\n';
+	cin>>namefile;
+	fp=fopen(namefile,"r");
+	if (fp==0) { cout<<"Файл не открыт!"<<'\n'; return -1; }
+	else
+	for(i=0;i<n;i++){       
+		fscanf(fp,"%s",(x+i)->name);
+		fscanf(fp,"%d",&(x+i)->age);
+		fscanf(fp,"%s",(x+i)->position);
+		cout << "Номер правителя: " << i+1 << " ";
+		cout << "Имя: " << (x + i)->name << " ";
+		cout << "Возраст: " << (x + i)->age << " ";
+		cout << "Должность: " << (x + i)->position << endl;
+	}
+	fclose(fp); 
+	cout << "\n\n";
+	return 1;
+}
+
+int menu() {
+	int i;
+	do {
+		cout << "1 - Просмотреть правителей в файле" << endl;
+		cout << "2 - Найти правителей младше определенного возраста" << endl;
+		cout << "3 - Найти правителя по имени" << endl;
+		cout << "4 - выход" << endl;
+		cout << "Ваш выбор: ";
+		cin >> i;
+		cout << endl;
+	} while (i != 1 && i != 2 && i != 3 && i != 4);
+	return i;
+}
+
+/*int addHuman(Human* x, int i) {
+	FILE* fp; char namefile[11];
+	cout << "Введите имя файла" << endl;
+	cin>>namefile;
+	fp=fopen(namefile,"a");
+	printf("Введите Имя, возраст и должность: ");
+	cin >> (x+i)->name;
+  	fprintf(fp,"%s\n", (x+i)->name); 
+	cin >> (x+i)->age;             	        
+  	fprintf(fp,"%d\n",(x+i)->age);
+	cin >> (x+i)->position;                      
+  	fprintf(fp,"%s\n",(x+i)->position);
+  	fclose(fp);
+  	cout << "\n\n";
+  	return 1;
+}*/
+
+int main() {
+	// для русского шрифта
+	SetConsoleCP(1251);
+	SetConsoleOutputCP(1251);
+	
+	int i,k, tage;
+	char tempname[30];
+	
+	cout << "Введите кол-во правителей: " << endl;
+	cin >> i;
+	
+	
+	Human* russianHuman;
+	russianHuman = new Human[i];
+	
+	writefile(russianHuman, i);
+	readfile(russianHuman, i);
+	
+	int choice;
+	do {
+		choice = menu();
+		switch(choice) {
+			case 1: readfile(russianHuman, i);
+			break;
+			case 2: cout << "Введите возраст: ";
+					cin >> tage;
+					Findold(russianHuman, i, tage);
+			break;
+			case 3: cout << "Введите имя правителя: ";
+					cin >> tempname;
+					k = FindName(russianHuman, i, tempname);
+					if(k != -1) vivod1(russianHuman, k);
+			break;
+		}
+	} while (choice != 4);
+}
