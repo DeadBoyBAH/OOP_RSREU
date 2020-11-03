@@ -1,0 +1,112 @@
+/* Программа Laba_6_7 				*/
+/* Функции					        */
+/* Программист: Пукин А.А., гр 944  */
+/* Проверил: Лаврентьев С.И. 		*/
+/* Дата написания: 06.10.2020 г. 	*/
+
+
+
+#include <iostream>
+#include <stdio.h>
+#include <cstdlib>
+#include <Windows.h>
+#include <string.h>
+
+using namespace std;
+
+int sum(int a, int b) {
+	return a + b;
+}
+
+int sub(int a, int b) {
+	return a - b;
+}
+
+int divide(int a, int b) {
+	return a/b;
+}
+
+int mult(int a, int b) {
+	return a*b;
+}
+
+double sum(double a, double b) {
+	return a + b;
+}
+
+double sub(double a, double b) {
+	return a - b;
+}
+
+double divide(double a, double b) {
+	return a/b;
+}
+
+double mult(double a, double b) {
+	return a*b;
+}
+
+void complutation_int() {
+	int a,b,n;
+	cout << "Введите два числа" << endl;
+	cin >> a >> b;
+	cout << "Выберите, что вы хотите с ними сделать:\n1 - Сложить\n2 - Вычесть\n3 - Поделить\n4 - Умножить" << endl;
+	cin >> n;
+	
+	switch(n) {
+		case 1: 
+			cout << sum(a,b);
+			break;
+		case 2: 
+			cout << sub(a,b);
+			break;
+		case 3: 
+			cout << divide(a,b);
+			break;
+		case 4: 
+			cout << mult(a,b);
+			break;
+  	}
+}
+
+void complutation_double() {
+	double a,b;
+	int n;
+	
+	cout << "Введите два числа" << endl;
+	cin >> a >> b;
+	cout << "Выберите, что вы хотите с ними сделать:\n1 - Сложить\n2 - Вычесть\n3 - Поделить\n4 - Умножить" << endl;
+	cin >> n;
+	
+	switch(n) {
+		case 1: 
+			cout << sum(a,b);
+			break;
+		case 2: 
+			cout << sub(a,b);
+			break;
+		case 3: 
+			cout << divide(a,b);
+			break;
+		case 4: 
+			cout << mult(a,b);
+			break;
+  	}
+}
+
+int main() {
+	
+	// для русского шрифта
+	SetConsoleCP(1251);
+	SetConsoleOutputCP(1251);
+	int a, b, n;
+	
+	cout << "С какими числами Вы хотите работать?\n1 - Целые\n2 - Вещественные" << endl;
+	cin >> n;
+	if (n == 1) {
+		complutation_int();
+	} 	else {
+		complutation_double();
+	}
+
+}
